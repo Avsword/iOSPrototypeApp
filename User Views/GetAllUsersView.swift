@@ -41,7 +41,7 @@ struct GetAllUsersView: View {
             }
             
         }.onAppear(perform: fetchAllUsers)
-            .padding(50)
+            .padding(25)
     }
 }
 struct GetAllUsersView_Previews: PreviewProvider {

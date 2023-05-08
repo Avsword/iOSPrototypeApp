@@ -17,7 +17,7 @@ func fetchUsers(  callback: @escaping (_ userList:[SingleUser])->Void){
         let jsonDecoder = JSONDecoder()
         // Decoding method depends
         let obj = try! jsonDecoder.decode(Users.self, from: data)
-        print(obj)
+        //print(obj)
        
         callback(obj.users)
     }
