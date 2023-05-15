@@ -17,3 +17,9 @@ struct SingleUser: Codable {
     var age: Int
     var gender: String
 }
+struct SingleUserPost: Codable {
+    var firstName: String
+    var lastName: String
+    var age: Int
+    var gender: String
+}
