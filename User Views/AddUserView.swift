@@ -12,20 +12,28 @@ struct AddUserView: View {
     @State var firstName: String = ""
     @State var lastName: String = ""
     @State var age: String = ""
-    
+    @State private var tempAge = ""
     
     
     enum Gender: String, CaseIterable, Identifiable {
         case male, female
         var id: Self { self }
     }
-
     @State private var selectedGender: Gender = Gender.male
-    
     var genderList = ["Male", "Female"]
     
+    @State var postOrPut:Bool = true
     init(){}
-    @State private var tempAge = ""
+    init(firstName: String = "", lastName: String = "", age: String = "",gender:String, postOrPut:Bool = true, id:Int) {
+            _firstName = State(initialValue: firstName)
+            _lastName = State(initialValue: lastName)
+            _age = State(initialValue: age)
+            _tempAge = State(initialValue: age)
+            _selectedGender =  State(initialValue: gender == "male" ? Gender.male : Gender.female)
+            _postOrPut = State(initialValue: postOrPut)
+            _optionalID = State(initialValue: id)
+        }
+    @State var optionalID:Int?
 
     @State private var addButtonEnabled:Bool = false
     @State private var showSuccessAlert:Bool = false
@@ -60,7 +68,7 @@ struct AddUserView: View {
             }.pickerStyle(.segmented)
             
             Button(action: {
-                postFunction(postOrPut:true, newPerson: SingleUserPost(firstName: firstName, lastName: lastName, age: Int(age) ?? 0, gender: selectedGender.rawValue)) { response in
+                postFunction(postOrPut:postOrPut, newPerson: SingleUserPost(firstName: firstName, lastName: lastName, age: Int(age) ?? 0, gender: selectedGender.rawValue), id: optionalID) { response in
                            print(response)
                            if(response.contains("success")){
                                showSuccessAlert=true
@@ -75,7 +83,11 @@ struct AddUserView: View {
                    .disabled(!addButtonEnabled)
             Spacer()
             
-        }.padding(50).frame(maxWidth: .infinity, alignment: .trailing).alert("New user added successfully!", isPresented: $showSuccessAlert) {
+        }
+            .onAppear(perform: textChanged)
+            .padding(50)
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .alert(postOrPut ? "New user added successfully!" : "\(firstName) Edited successfully!", isPresented: $showSuccessAlert) {
             Button("OK", role: .cancel) { }
         }
             

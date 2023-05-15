@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-func postFunction(postOrPut:Bool, newPerson: SingleUserPost, callback: @escaping (_ response:String)->Void) -> Void {
+func postFunction(postOrPut:Bool, newPerson: SingleUserPost, id:Int?, callback: @escaping (_ response:String)->Void) -> Void {
     let parameters: [String: Any] = [
         "firstName": newPerson.firstName,
         "lastName": newPerson.lastName,
@@ -15,9 +15,19 @@ func postFunction(postOrPut:Bool, newPerson: SingleUserPost, callback: @escaping
         "gender": newPerson.gender,
     ]
     
-    
-    AF.request("https://dummyjson.com/users/add", method: postOrPut ? .post : .put, parameters: parameters, encoding: JSONEncoding.default)
-        .responseString { responseDecodable in
-            callback(responseDecodable.description)
+    if(postOrPut){
+        AF.request("https://dummyjson.com/users/add", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseString { responseDecodable in
+                callback(responseDecodable.description)
+            }
+    }else{
+        if let userid = id {
+            AF.request("https://dummyjson.com/users/\(userid)", method: .put  , parameters: parameters, encoding: JSONEncoding.default)
+                .responseString { responseDecodable in
+                    callback(responseDecodable.description)
+                }
         }
+        
+    }
+    
 }
