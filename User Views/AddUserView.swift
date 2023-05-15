@@ -24,16 +24,27 @@ struct AddUserView: View {
     var genderList = ["Male", "Female"]
     
     init(){}
-    
+    @State private var tempAge = ""
     var body: some View {
         VStack{
             TextField("First name", text: $firstName)
             TextField("Last name", text: $lastName)
-            TextField("Age", text: $age)
+            TextField("Age", text: $tempAge)
                 .textFieldStyle(.roundedBorder)
                 .keyboardType(.numberPad)
-                .onChange(of: age){ newValue in
-                    //TODO: ADD VALIDATION
+                .onChange(of: tempAge){ newValue in
+                    // 'simpleDigits' is created from a pattern in a string
+                    let simpleDigits = try? Regex("[0-9]+")
+                    if((try? simpleDigits?.wholeMatch(in: tempAge)) != nil){
+                        print("Regex contains only numbers")
+                        // We can pretty liberally add the exclamation marks here since the regex makes sure that it contains numbers.
+                        if(Int(tempAge)!>0 && Int(tempAge)!<=100){
+                            age = newValue
+                        }
+                    }else{
+                    }else{
+                        print("Other added")
+                    }
                 }
             Picker("Gender", selection: $selectedGender) {
                 Text("Male").tag(Gender.male)
@@ -41,7 +52,7 @@ struct AddUserView: View {
             }.pickerStyle(.segmented)
             
             Button("Add"){
-                print("Added")
+                print("Added \(age)")
             }
             Spacer()
         }.padding(50).frame(maxWidth: .infinity, alignment: .trailing)
