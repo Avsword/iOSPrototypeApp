@@ -75,6 +75,7 @@ struct AddUserView: View {
                                firstName=""
                                lastName=""
                                age=""
+                               tempAge=""
                            }
                        }
                    }) {

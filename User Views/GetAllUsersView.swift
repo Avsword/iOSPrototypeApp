@@ -48,7 +48,6 @@ struct GetAllUsersView: View {
                     }
                 }
             }
-            
         }.onAppear(perform: fetchAllUsers)
             .padding(25)
             .alert(isPresented: $showAddOrRemoveAlert){
