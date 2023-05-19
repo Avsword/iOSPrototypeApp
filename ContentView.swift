@@ -20,9 +20,7 @@ struct ContentView: View {
             AddUserView().tabItem{
                 Label("Add", systemImage: "plus")
             }
-            DeleteUserView().tabItem{
-                Label("Delete", systemImage: "minus")
-            }
+
         }
     }
 }

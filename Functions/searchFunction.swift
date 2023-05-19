@@ -13,7 +13,6 @@ func searchFunction(name:String, callback: @escaping (_ response:SingleUser)->Vo
         guard let notNull = data.value else {
                 return
             }
-        
         if let jsonString = String(data: notNull, encoding: .utf8) {
                    print(jsonString)
         }
@@ -26,7 +25,5 @@ func searchFunction(name:String, callback: @escaping (_ response:SingleUser)->Vo
         }else{
             callback(SingleUser(id: 666, firstName: "User", lastName: "Not found", age: 0, gender: "Male"))
         }
-        
-
     }
 }

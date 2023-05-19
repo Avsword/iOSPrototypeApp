@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-func postFunction(postOrPut:Bool, newPerson: SingleUserPost, id:Int?, callback: @escaping (_ response:String)->Void) -> Void {
+func postOrPutFunction(postOrPut:Bool, newPerson: SingleUserPost, id:Int?, callback: @escaping (_ response:String)->Void) -> Void {
     let parameters: [String: Any] = [
         "firstName": newPerson.firstName,
         "lastName": newPerson.lastName,

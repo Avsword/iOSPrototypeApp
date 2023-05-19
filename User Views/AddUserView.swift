@@ -68,7 +68,7 @@ struct AddUserView: View {
             }.pickerStyle(.segmented)
             
             Button(action: {
-                postFunction(postOrPut:postOrPut, newPerson: SingleUserPost(firstName: firstName, lastName: lastName, age: Int(age) ?? 0, gender: selectedGender.rawValue), id: optionalID) { response in
+                postOrPutFunction(postOrPut:postOrPut, newPerson: SingleUserPost(firstName: firstName, lastName: lastName, age: Int(age) ?? 0, gender: selectedGender.rawValue), id: optionalID) { response in
                            print(response)
                            if(response.contains("success")){
                                showSuccessAlert=true
@@ -94,7 +94,7 @@ struct AddUserView: View {
             
     }
      func textChanged() {
-        addButtonEnabled = ![firstName, lastName, age].contains { $0.isEmpty }
+         addButtonEnabled = ![firstName, lastName, age].contains { $0.isEmpty } && (firstName.rangeOfCharacter(from: .decimalDigits) == nil) && (lastName.rangeOfCharacter(from: .decimalDigits) == nil)
     }
 }
 
