@@ -7,7 +7,13 @@
 
 import Foundation
 import Alamofire
-func postOrPutFunction(postOrPut:Bool, newPerson: SingleUserPost, id:Int?, callback: @escaping (_ response:String)->Void) -> Void {
+/// This function is responsible for handling post and put requests.
+/// - Parameters:
+///   - postOrPut: If true, post. If false, put.
+///   - newPerson: The data we want to post/put.
+///   - id: If we update a user, we need their id.
+///   - callback: What do we do with the response?
+func postOrPutFunction(postOrPut:Bool, newPerson: SingleUserPost, id:Int?, callback: @escaping (_ response:String)->Void){
     let parameters: [String: Any] = [
         "firstName": newPerson.firstName,
         "lastName": newPerson.lastName,

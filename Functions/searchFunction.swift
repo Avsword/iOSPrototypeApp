@@ -8,7 +8,12 @@
 import Foundation
 import Alamofire
 
-func searchFunction(name:String, callback: @escaping (_ response:SingleUser)->Void) -> Void {
+/// Searches for a user with a given search parameter
+/// - Parameters:
+///   - name: What we use as the search parameter. Could be id or age also, but most users search by name.
+///   - callback: What do we do with the user that is returned from the request?
+/// - Returns: Function doesn't explicitly return anything, but we do use a callback function.
+func searchFunction(name:String, callback: @escaping (_ response:SingleUser)->Void){
     AF.request("https://dummyjson.com/users/search?q=\(name)").responseData { data in
         guard let notNull = data.value else {
                 return

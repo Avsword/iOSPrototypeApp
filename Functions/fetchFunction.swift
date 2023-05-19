@@ -8,6 +8,8 @@
 import Foundation
 import Alamofire
 
+/// Fetches all users and puts them in a list of SingleUsers.
+/// - Parameter callback: Determined in GetAllUsersView what we want to do with the list of users.
 func fetchUsers(  callback: @escaping (_ userList:[SingleUser])->Void){
     AF.request("https://dummyjson.com/users").responseData { response  in
         
