@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// Tab for adding or updating users.
 struct AddUserView: View {
     @State var firstName: String = ""
     @State var lastName: String = ""
@@ -24,6 +25,15 @@ struct AddUserView: View {
     
     @State var postOrPut:Bool = true
     init(){}
+    
+    /// Init for updating users
+    /// - Parameters:
+    ///   - firstName: Initial value of the user
+    ///   - lastName: Initial value of the user
+    ///   - age: Initial value of the user
+    ///   - gender: Initial value of the user
+    ///   - postOrPut: Do we want to post or put
+    ///   - id: Initial value of the user
     init(firstName: String = "", lastName: String = "", age: String = "",gender:String, postOrPut:Bool = true, id:Int) {
             _firstName = State(initialValue: firstName)
             _lastName = State(initialValue: lastName)
@@ -37,6 +47,8 @@ struct AddUserView: View {
 
     @State private var addButtonEnabled:Bool = false
     @State private var showSuccessAlert:Bool = false
+    
+    /// Creates a VStack with fields for the name, age, and gender in addition to a button for adding or updating.
     var body: some View {
         VStack{
             TextField("First name", text: $firstName).onChange(of: firstName){new in
@@ -93,6 +105,7 @@ struct AddUserView: View {
         }
             
     }
+    /// Check all inputs if they are valid. If they are, enable the button.
      func textChanged() {
          addButtonEnabled = ![firstName, lastName, age].contains { $0.isEmpty } && (firstName.rangeOfCharacter(from: .decimalDigits) == nil) && (lastName.rangeOfCharacter(from: .decimalDigits) == nil)
     }

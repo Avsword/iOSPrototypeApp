@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// SearchUserView is the tab for searching for users and displaying them.
 struct SearchUserView: View {
     @State var userInput:String
     init() {
@@ -15,6 +16,11 @@ struct SearchUserView: View {
     @State var searchResult: SingleUser? = nil
     
     
+    /// Creates a VSTACK containing a button and the result.
+    ///
+    /// Once the button is pressed, it calls the searchFunction and based
+    /// fills the searchResult based on that.
+            
     var body: some View {
         VStack{
             TextField("Search by name :)", text: $userInput)

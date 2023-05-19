@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Tab for viewing all of the users in a List format.
 struct GetAllUsersView: View {
     @State var 👤: [SingleUser]?
  
@@ -21,6 +22,8 @@ struct GetAllUsersView: View {
     @State var selectedID:Int = 0
     init() {
     }
+    /// Creates a list item for every user with the name age and gender.
+    ///  Should a user be clicked, it'll show an alert to update or delete said user.
     var body: some View {
         List{
             if let userListNotNull = 👤{
