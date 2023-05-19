@@ -51,7 +51,10 @@ struct GetAllUsersView: View {
                     }
                 }
             }
-        }.onAppear(perform: fetchAllUsers)
+        }
+            .scrollContentBackground(.hidden)
+            .background(Color.white)
+            .onAppear(perform: fetchAllUsers)
             .padding(25)
             .alert(isPresented: $showAddOrRemoveAlert){
                 Alert(
